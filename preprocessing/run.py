@@ -27,6 +27,7 @@ def main():
     tsne_df = apply_tsne(X_scaled)
 
     final_df = pd.concat([df_reduced.reset_index(drop=True), pca_df, tsne_df], axis=1)
+    loadings_df.to_csv(processed_dir / 'pca_loadings.csv', index=True)
 
     final_df.to_csv(out_path, index=False)
     print(f"Preprocessed data saved to '{out_path}'.")
