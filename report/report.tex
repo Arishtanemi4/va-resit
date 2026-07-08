@@ -1,0 +1,355 @@
+\documentclass[11pt,a4paper]{article}
+% geometry.sty is unavailable in this MiKTeX install (no package server);
+% equivalent 2.3cm margins set with plain LaTeX lengths instead.
+\setlength{\oddsidemargin}{-0.24cm}
+\setlength{\evensidemargin}{-0.24cm}
+\setlength{\textwidth}{16.4cm}
+\setlength{\topmargin}{-0.24cm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+\setlength{\textheight}{25.1cm}
+
+% Section + page numbers are a stated marking requirement (guidelines §4/§6).
+\pagestyle{plain}
+
+\title{Visual Analytics of the 1994 UCI Adult Census Dataset:\\
+Bayesian Imputation, Dimensionality Reduction and an Interactive Tableau Dashboard}
+\author{Visual Analytics --- Resit Coursework}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent We present an exploratory visual analysis of the 1994 UCI Adult
+census extract (48{,}842 records, 14 attributes) for a policy-analyst user,
+combining Bayesian multinomial imputation of missing employment attributes
+with two dimensionality-reduction projections (PCA and t-SNE) delivered as
+an interactive Tableau dashboard. The main finding is that reported
+\emph{capital income}, not wage-related attributes, is the sharpest visual
+separator of high earners: the PCA projection splits the population into
+three strata by capital-gain/loss activity, and within the capital-gain
+stratum 61.4\% of respondents earn over \$50K versus 18.9\% in the
+no-capital-activity majority (base rate 23.9\%). Within every stratum,
+income rises along a work/status composite (hours worked, education, age,
+sex). Occupation and education gradients are steep --- from 3.7\%
+(\textit{Other-service}) to 47.6\% (\textit{Exec-managerial}) and from
+15.9\% (high-school) to 74.0\% (professional school) --- and the male
+high-income rate (30.4\%) is nearly triple the female rate (10.9\%).
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+The Adult dataset, extracted from the 1994 US Census by Kohavi~\cite{kohavi},
+records demographic and employment attributes together with a binarised
+income label ($\leq$\$50K / $>$\$50K). It is a standard benchmark for
+classification, but classification accuracy alone tells an analyst little
+about \emph{structure}: which population segments drive high income, how
+those segments overlap, and where the data itself is unreliable.
+
+The intended user of this work is a \textbf{policy analyst} studying the
+socio-economic drivers of income inequality: a domain expert who is fluent in
+census vocabulary and comfortable with interactive dashboards, but who does
+not read code and should not have to trust opaque model outputs. Following
+Munzner's nested model~\cite[Ch.~4]{munzner}, this domain situation drives
+every downstream choice: the task abstraction (\S\ref{sec:tasks}), the visual
+encoding idioms (\S\ref{sec:vis}), and the algorithms (PCA, t-SNE, NUTS).
+
+Why visualization rather than summary tables? Anscombe's Quartet
+\cite[pp.~8--9]{munzner} is the canonical argument: datasets with identical
+summary statistics can differ radically in structure that is obvious the
+moment it is plotted. The census equivalent: a table of income-by-education
+means cannot reveal that capital-gain reporters form a separate,
+majority-high-income stratum of the population --- the PCA projection makes
+this visible in a single view (\S\ref{sec:vis}).
+
+The deliverable is a packaged Tableau workbook
+(\texttt{adult\_dashboard.twbx}) with two projection views
+(\texttt{Proj\_PCA}, \texttt{Proj\_tSNE}), three group-comparison views with
+an absolute/proportion toggle (\texttt{Income\_by\_Education},
+\texttt{Income\_by\_Occupation}, \texttt{Income\_by\_Age}), an imputation
+quality view (\texttt{Bayesian\_Imputation\_QA}), and an overview dashboard.
+
+\section{Data Preparation and Abstraction}\label{sec:data}
+The analysis dataset combines the UCI \texttt{adult.data} and
+\texttt{adult.test} files (48{,}842 rows, 14 features, one label).
+Combining them required stripping trailing periods from test-set labels
+and leading whitespace from all categorical values. The full pipeline is
+reproducible: staged Python scripts with printed verification gates, fixed
+random seeds, and all dimensionality-reduction hyperparameters logged to
+\texttt{params.json}.
+
+\paragraph{Anomalies, quantified.}
+The \texttt{?} sentinel marks missing values in exactly three columns:
+\texttt{workclass} (2{,}799), \texttt{occupation} (2{,}809) and
+\texttt{native-country} (857). The missingness is not homogeneous, and we
+name the two kinds separately. All 2{,}799 \texttt{workclass} gaps co-occur
+with \texttt{occupation} gaps (structural co-missingness of the employment
+block), and the 10 remaining \texttt{occupation} gaps belong to
+\texttt{Never-worked} respondents for whom no occupation exists ---
+these are set directly to an explicit \emph{None (never worked)} category
+rather than being modelled. Only \texttt{native-country} exhibits ordinary
+item missingness; its 857 gaps are recoded to an explicit \emph{Unknown}
+category because a 41-class Bayesian model is disproportionate for a column
+that is not a projection input --- a stated trade-off, not a hidden one.
+There are 52 full-row duplicates, retained as plausible identical census
+records. \texttt{education} and \texttt{education-num} are a redundant 1:1
+pair; the ordinal \texttt{education-num} is kept for modelling and the text
+form retained only as tooltip context (a \emph{derive} decision in Munzner's
+sense~\cite[pp.~49--53]{munzner}).
+
+\paragraph{Data abstraction.}
+In Munzner's Ch.~2 vocabulary the dataset is a flat table of 48{,}842 items.
+Quantitative attributes: \texttt{age}, \texttt{fnlwgt},
+\texttt{capital-gain}, \texttt{capital-loss}, \texttt{hours-per-week};
+ordinal: \texttt{education-num}; categorical: \texttt{workclass},
+\texttt{occupation}, \texttt{marital-status}, \texttt{relationship},
+\texttt{race}, \texttt{sex}, \texttt{native-country}; the label
+\texttt{income} is \emph{binary} categorical, which matters for the colour
+encoding (\S\ref{sec:vis}). Categorical/ordinal attributes act as keys and
+quantitative attributes as values --- exactly the Dimensions/Measures split
+Tableau inherits from Polaris~\cite[p.~40]{munzner}.
+
+\paragraph{Bayesian imputation.}
+The employment attributes were imputed with sequential Bayesian multinomial
+logistic regressions in PyMC (NUTS sampler via nutpie; 1{,}000 posterior
+draws, 500 tuning steps, 4 chains, fixed seed): first \texttt{workclass},
+then \texttt{occupation} with the (now complete) \texttt{workclass} as an
+additional predictor, mirroring their structural dependency. Predictors ---
+standardised \texttt{age}, \texttt{education-num},
+\texttt{hours-per-week}, \texttt{sex}, and marital status collapsed to
+married / previously married / never married --- were chosen as complete
+columns plausibly associated with employment type. Each model was fitted on
+a stratified subsample of $\approx$8{,}000 observed rows (minimum 15 rows
+per class) to keep full NUTS sampling tractable; predictions cover every
+missing row. Convergence was checked before proceeding: maximum
+$\hat{R}=1.000$ (min bulk ESS 1{,}094) for the workclass model and
+$\hat{R}=1.010$ (min bulk ESS 777) for the occupation model, both within
+the pre-registered $\hat{R} \leq 1.05$ gate.
+
+The standard ``posterior mean / posterior std'' imputation recipe assumes a
+continuous target; for these categorical targets we store the
+posterior-predictive \emph{modal category} as the imputed value, and the
+modal probability plus predictive entropy as per-row uncertainty columns.
+This makes the imputation's confidence itself visualisable: mean modal
+probability was 0.756 for workclass but only 0.297 for occupation (14
+classes), i.e.\ the model is honest that occupation is hard to recover.
+A known artefact of modal point imputation is surfaced rather than hidden:
+it over-assigns majority classes (99.8\% of imputed workclass rows became
+\textit{Private} versus 73.6\% in the observed marginal). The
+\texttt{Bayesian\_Imputation\_QA} sheet plots imputed against observed
+distributions precisely so the analyst sees this shrinkage; the stored
+entropy columns quantify it per row. A mode-imputation baseline (which
+would place \emph{100\%} of rows in the majority class with no uncertainty
+estimate) is retained in the dataset as a clearly labelled fallback
+comparison only.
+
+\paragraph{Projection feature space.}
+Both projections use the same six standardised features ---
+\texttt{age}, \texttt{education-num}, \texttt{hours-per-week},
+$\log(1{+}\texttt{capital-gain})$, $\log(1{+}\texttt{capital-loss})$,
+\texttt{sex} --- recorded verbatim in a \texttt{variables\_used} column
+that every projection tooltip displays. Exclusions are deliberate:
+\texttt{income} is the conjectured categorisation the projections are meant
+to \emph{verify}~\cite[\S13.4.3]{munzner} and would leak the answer into
+the layout; \texttt{fnlwgt} is a survey design weight describing the
+sampling frame, not the respondent; the high-cardinality nominals are
+surfaced through tooltips instead of being one-hot inflated into the
+distance metric.
+
+\section{Task Definition}\label{sec:tasks}
+Tasks are phrased in Munzner's action/target vocabulary~\cite[Ch.~3]{munzner}
+so that each view can be checked against the question it exists to answer.
+
+\begin{enumerate}
+  \item \textbf{Discover and verify cluster structure.} \emph{Discover}
+  whether the six-attribute feature space contains clusters or strata, and
+  \emph{verify} whether they align with the income category
+  (targets: clusters, similarity). Answered by \texttt{Proj\_PCA} and
+  \texttt{Proj\_tSNE}: the analyst inspects colour-coded structure, then
+  uses tooltips to \emph{identify} what individual points are.
+  \item \textbf{Compare income distributions across groups.} \emph{Compare}
+  the income distribution (target: distribution) across education levels,
+  occupations and 5-year age bands --- in absolute counts when the analyst
+  asks ``where are the people?'' and proportions when asking ``which group
+  has the highest rate?''. Answered by the three \texttt{Income\_by\_*}
+  sheets with the \textsf{Show As} parameter toggle.
+  \item \textbf{Summarise imputation quality.} \emph{Summarise} the derived
+  (imputed) data and \emph{compare} imputed against observed category
+  distributions, so the analyst knows how much trust to place in the
+  5.7\% of rows whose employment attributes are model output. Answered by
+  \texttt{Bayesian\_Imputation\_QA}.
+\end{enumerate}
+
+\section{Visualisation Justification}\label{sec:vis}
+We justify each view at the idiom level of the nested
+model~\cite[Ch.~4]{munzner}, citing the perceptual evidence for every
+channel choice.
+
+\paragraph{Projections as scatterplots.}
+Dimensionality reduction is attribute aggregation in Munzner's
+taxonomy~\cite[\S13.4.3]{munzner}, and its display follows the
+document-collection pattern given there: high-dimensional table
+$\rightarrow$ 2D layout $\rightarrow$ scatterplot colour-coded by a
+conjectured categorisation, with the task of verifying whether visual
+clusters match it. Two-dimensional scatterplots are empirically the safest
+idiom for inspecting reduced data~\cite{sedlmair}; a 3D scatterplot was
+rejected on both this DR-specific evidence and the general argument against
+unjustified 3D for abstract data (depth is read far less accurately than
+planar position; occlusion and perspective distortion break the position
+and size channels)~\cite[Ch.~6.3]{munzner}.
+
+\begin{table}[h]\centering\small
+\begin{tabular}{ll}
+\hline
+Idiom & \texttt{Proj\_PCA} / \texttt{Proj\_tSNE} \\
+\hline
+What: data & Table, 48{,}842 items $\times$ 6 quantitative attributes \\
+What: derived & 2 synthetic attributes (PC1/PC2 or TSNE1/TSNE2); \\
+ & \texttt{variables\_used} records the contributing attributes \\
+How: encode & Point marks; aligned position for the 2 synthetic attributes; \\
+ & hue for binary \texttt{income}; 30\% opacity against overplotting \\
+How: facet & Juxtaposed in the overview dashboard; same data, same colour \\
+ & encoding, independent navigation \\
+How: reduce & None (all items shown; aggregation happens in attribute space) \\
+Why: task & Discover/verify income-aligned cluster structure; identify \\
+ & points via details-on-demand tooltips \\
+Scale & 48{,}842 marks \\
+\hline
+\end{tabular}
+\caption{Idiom analysis of the projection sheets, following the summary-table
+format Munzner uses for the equivalent DR scenario \cite[p.~319]{munzner}.}
+\end{table}
+
+Position on a common scale is the most accurate magnitude channel, so it is
+reserved for the projection coordinates themselves; \texttt{income}, a
+binary categorical attribute, takes hue --- the highest-ranked identity
+channel after spatial position~\cite[Fig.~5.6]{munzner}. Encoding a
+categorical attribute with an ordered channel (or vice versa) would violate
+the expressiveness principle~\cite[p.~100]{munzner}. With 48{,}842 marks the
+scatterplot is beyond the ``dozens to hundreds'' comfort zone Munzner notes
+for scatterplots~\cite[\S7.4]{munzner}; 30\% mark opacity turns overlap
+into readable density, which is what rescues the idiom at this scale.
+
+Both projection layouts carry two caveats that the dashboard states and the
+analyst must internalise: DR layouts are affine invariant, so only
+\emph{relative} distances carry meaning, never absolute position or
+orientation; and fine-grained distances are less reliable than large-scale
+cluster structure because information is necessarily lost in the
+reduction~\cite[pp.~319--320]{munzner}. The t-SNE view additionally shows
+thread-like micro-clusters: census attributes are quasi-discrete, so many
+records are exact duplicates in feature space --- an artefact of the data's
+granularity, not evidence of fine social structure. t-SNE hyperparameters
+(perplexity 30, 1{,}000 iterations, PCA initialisation, fixed
+seed~\cite{vandermaaten}) are logged in \texttt{params.json}.
+
+\paragraph{Tooltips.}
+Every projection mark carries a details-on-demand tooltip (age, education,
+occupation, income, hours/week, sex, and the \texttt{variables\_used}
+string), implementing the overview-first, details-on-demand
+mantra~\cite{shneiderman}\cite[\S6.7]{munzner}. Displaying
+\texttt{variables\_used} in the tooltip operationalises the requirement that
+DR plots communicate which original variables produced them --- the
+synthetic axes are otherwise uninterpretable to the analyst.
+
+\paragraph{Group comparison bars.}
+The \texttt{Income\_by\_*} sheets are stacked bar charts: one categorical
+key (region: separated and ordered along an axis) and one quantitative
+value (aligned position), with hue for the income
+split~\cite[\S7.5]{munzner}. Ordering is a deliberate, named decision in
+each case: education is ordered by \texttt{education-num} (its inherent
+ordinal order), occupations are value-sorted to reveal the gradient, and
+age bands follow their natural sequence. The mandatory
+absolute\,/\,proportion toggle is one \textsf{Show As} parameter driving a
+calculated field (not two parallel sheets), and its justification is
+perceptual: absolute counts and proportions support different comparison
+tasks when group sizes differ~\cite[\S5.6]{munzner} --- \textit{Doctorate}
+holders are a tiny bar in absolute view yet the second-highest rate
+(72.6\%) in proportional view.
+
+\paragraph{Colour.}
+The income palette (blue $\leq$\$50K, orange $>$\$50K) was validated
+computationally, not by eye: simulated protanopia/deuteranopia/tritanopia
+colour distances all exceed $\Delta E = 96$ and both colours clear 3:1
+contrast on the workbook background. This matters because red--green
+colour-vision deficiency affects roughly 8\% of males~\cite[p.~235]{munzner},
+and the two hues also differ in luminance, satisfying the ``get it right in
+black and white'' rule~\cite[p.~140]{munzner}. The palette ships as
+\texttt{Preferences.tps}. The QA sheet uses neutral grey for observed rows
+so the imputed (blue) distribution is the visually dominant comparison.
+
+\paragraph{Imputation QA view.}
+\texttt{Bayesian\_Imputation\_QA} juxtaposes the workclass distribution of
+imputed rows against observed rows as aligned bars sharing one axis ---
+``eyes beat memory'': simultaneous views beat remembered
+comparison~\cite[\S6.5]{munzner}. This view exists because imputation is a
+\emph{derive} operation whose output the analyst must be able to audit; it
+is where the modal-imputation majority-shrinkage (\S\ref{sec:data}) is
+visible instead of buried in a methods paragraph.
+
+\paragraph{Dashboard composition.}
+The overview dashboard is a juxtaposed, coordinated multi-view
+design~\cite[Ch.~12]{munzner}: all views share the same underlying data and
+the same income colour encoding (shared encoding, all-data), while
+navigation is independent per view. The parameter control is placed once,
+above the views it drives. No 3D, gradients, shadows or decorative effects
+are used --- function first, form next~\cite[\S6.10]{munzner}.
+
+\section{Conclusion}\label{sec:conclusion}
+\paragraph{What the analyst learns.}
+The projections answer Task~1 affirmatively and specifically: the feature
+space is stratified, and the strata are economic. PCA's second component is
+dominated by capital income ($+0.70$ capital-loss, $-0.63$ capital-gain
+loadings), splitting the population into a capital-gain stratum (8.3\% of
+respondents, 61.4\% of whom earn $>$\$50K), a capital-loss stratum (50.1\%
+high earners) and the no-capital-activity majority (18.9\%). Reporting
+\emph{any} capital activity is thus a stronger high-income signal than any
+demographic attribute --- a directly policy-relevant asymmetry between
+capital and wage income. Within every stratum, income rises along a
+work/status composite (PC1: hours worked 0.56, sex 0.47, education 0.39,
+age 0.36). The comparison views quantify the gradients (Task~2): by
+occupation, from 3.7\% (\textit{Other-service}) to 47.6\%
+(\textit{Exec-managerial}); by education, monotonically from 15.9\%
+(high-school) through 41.3\% (Bachelors) to 74.0\% (professional school);
+by age, a life-cycle hump peaking at 40.2\% for ages 50--54; by sex, 30.4\%
+of men versus 10.9\% of women --- visible in the projections as the
+male-coded region of PC1. The QA view (Task~3) tells the analyst to treat
+imputed employment rows as low-confidence: occupation imputation carries
+mean modal probability 0.297, and imputed rows over-represent majority
+classes.
+
+\paragraph{What we learned about large-scale visualization.}
+Three lessons stand out. First, at $\sim$50K items every idiom decision
+becomes a scalability decision: raw scatterplots saturate, and opacity,
+aggregation or projection --- not a bigger canvas --- are what restore
+readability. Second, derived data needs its own visualization: both the
+DR coordinates and the imputed values are model outputs, and the coursework's
+most honest views (\texttt{variables\_used} tooltips, the QA sheet, the
+entropy columns) exist to keep those derivations auditable rather than
+authoritative; visual analytics that hides its derivations is
+indistinguishable from decoration. Third, the perceptual rules are
+checkable: palette safety was \emph{computed} (CVD simulation distances),
+convergence was gated on $\hat{R}$, and each pipeline stage printed a
+verification before the next ran --- treating design guidance as testable
+constraints rather than taste made the workbook right on first open.
+
+\begin{thebibliography}{9}
+\bibitem{munzner} T.~Munzner, \emph{Visualization Analysis and Design}.
+CRC Press, 2014.
+\bibitem{sedlmair} M.~Sedlmair, T.~Munzner and M.~Tory,
+``Empirical guidance on scatterplot and dimension reduction technique
+choices,'' \emph{IEEE Trans.\ Visualization and Computer Graphics},
+19(12):2634--2643, 2013.
+\bibitem{shneiderman} B.~Shneiderman, ``The eyes have it: a task by data
+type taxonomy for information visualizations,'' \emph{Proc.\ IEEE Symp.\
+Visual Languages}, 1996.
+\bibitem{vandermaaten} L.~van der Maaten and G.~Hinton, ``Visualizing data
+using t-SNE,'' \emph{J.\ Machine Learning Research}, 9:2579--2605, 2008.
+\bibitem{kohavi} R.~Kohavi, ``Scaling up the accuracy of naive-Bayes
+classifiers: a decision-tree hybrid,'' \emph{Proc.\ KDD}, 1996.
+\bibitem{cleveland} W.~S.~Cleveland and R.~McGill, ``Graphical perception:
+theory, experimentation, and application to the development of graphical
+methods,'' \emph{J.\ American Statistical Association}, 79(387):531--554,
+1984.
+\end{thebibliography}
+
+\end{document}

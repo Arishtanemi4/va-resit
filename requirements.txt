@@ -1,0 +1,13 @@
+# Direct dependencies for the va-resit pipeline (python 3.11, conda env: va-resit)
+# Install: conda run -n va-resit pip install -r requirements.txt
+numpy==2.4.6
+pandas==3.0.3
+scipy==1.17.1
+scikit-learn==1.9.0
+matplotlib==3.11.0
+seaborn==0.13.2
+plotly==6.8.0
+pymc==5.28.5
+arviz==0.23.4
+nutpie==0.16.8
+requests==2.34.2
