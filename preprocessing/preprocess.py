@@ -7,7 +7,6 @@ from sklearn.linear_model import BayesianRidge
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 
-
 def load_and_clean_anomalies(filepath):
     column_names = [
         'age', 'workclass', 'fnlwgt', 'education', 'education-num',
@@ -45,9 +44,7 @@ def encode_categorical_data(df):
 
 
 def impute_missing_data_bayesian(X):
-
     bayesian_imputer = IterativeImputer(estimator=BayesianRidge(), max_iter=10, random_state=42)
-    
     X_imputed = pd.DataFrame(bayesian_imputer.fit_transform(X), columns=X.columns)
     
     print(X_imputed.isnull().sum().sum(), "total missing values remain.")
@@ -56,7 +53,7 @@ def impute_missing_data_bayesian(X):
 
 
 def scale_data(X):
-
     scaler = StandardScaler()
     X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
     return X_scaled
+
