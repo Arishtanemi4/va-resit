@@ -4,12 +4,14 @@ import numpy as np
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 from sklearn.linear_model import BayesianRidge
-from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.preprocessing import StandardScaler
 
 
 
-# Reads the raw census file and swaps the '?' placeholders for real
-# missing values, so later steps can actually detect what's missing.
+# Reads the raw census file, swaps the '?' placeholders for real missing
+# values, and drops 'education-num' since it's just a numeric restatement
+# of 'education' (checked below, not assumed) — we keep the readable
+# 'education' label instead since that's more useful for Tableau.
 def load_and_clean_anomalies(filepath):
     column_names = [
         'age', 'workclass', 'fnlwgt', 'education', 'education-num',
@@ -24,30 +26,12 @@ def load_and_clean_anomalies(filepath):
     print("--- Missing Values Count per Column ---")
     print(df.isnull().sum())  # count blanks per column, then just print those counts
 
+    labels_per_code = df.groupby('education-num')['education'].nunique()  # count how many different education labels share each education-num code
+    if not (labels_per_code == 1).all():
+        raise ValueError("education-num no longer matches education 1-to-1, so it can't be safely dropped")
+    df = df.drop(columns=['education-num'])
+
     return df
-
-
-# Drops the 'education' text column because 'education-num' already
-# stores the same information as a number, so keeping both is redundant.
-def drop_redundant_features(df):
-    if 'education' in df.columns:
-        df = df.drop(columns=['education'])
-    return df
-
-
-# Turns each text category (e.g. job type) into its own 0/1 column so a
-# model/PCA can use it, and separates out the income label being described.
-def encode_categorical_data(df):
-    X = df.drop(columns=['income'])
-    y = df['income']
-
-    le = LabelEncoder()
-    y_encoded = pd.Series(le.fit_transform(y), name='income')
-
-    categorical_cols = X.select_dtypes(include=['object']).columns
-    X_encoded = pd.get_dummies(X, columns=categorical_cols, drop_first=True)
-
-    return X_encoded, y_encoded
 
 
 # Converts each category into a single number code (blanks stay blank) so
@@ -71,13 +55,9 @@ def encode_ordinal_categoricals(df):
 # Fills in the missing values by predicting them from a person's other
 # answers, using a Bayesian statistical model rather than a simple average.
 def impute_missing_data_bayesian(X):
-
     bayesian_imputer = IterativeImputer(estimator=BayesianRidge(), max_iter=10, random_state=42)
-
     X_imputed = pd.DataFrame(bayesian_imputer.fit_transform(X), columns=X.columns)
-
     print(X_imputed.isnull().sum().sum(), "total missing values remain.")  # count remaining blanks, then total them into one number
-
     return X_imputed
 
 
@@ -95,7 +75,6 @@ def decode_imputed_categoricals(df, X_imputed, category_maps):
 # Rescales every number column onto the same scale, so a column like
 # income in dollars doesn't dominate columns like age just by being bigger.
 def scale_data(X):
-
     scaler = StandardScaler()
     X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
     return X_scaled
