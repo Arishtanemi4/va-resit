@@ -8,18 +8,24 @@ from sklearn.preprocessing import StandardScaler
 
 
 
-# Reads the raw census file, swaps the '?' placeholders for real missing
-# values, and drops 'education-num' since it's just a numeric restatement
-# of 'education' (checked below, not assumed) — we keep the readable
-# 'education' label instead since that's more useful for Tableau.
-def load_and_clean_anomalies(filepath):
+# Reads BOTH raw census splits (adult.data + adult.test) and stacks them
+# into one table, swaps the '?' placeholders for real missing values, and
+# drops two columns: 'education-num' (a numeric restatement of 'education',
+# checked below, not assumed — we keep the readable 'education' label since
+# it's more useful for Tableau) and 'fnlwgt' (a Census survey sampling
+# weight, not a person's attribute — see docs/REPLAN.md §9).
+def load_and_clean_anomalies(data_path, test_path):
     column_names = [
         'age', 'workclass', 'fnlwgt', 'education', 'education-num',
         'marital-status', 'occupation', 'relationship', 'race', 'sex',
         'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'income'
     ]
 
-    df = pd.read_csv(filepath, header=None, names=column_names, skipinitialspace=True)
+    df_data = pd.read_csv(data_path, header=None, names=column_names, skipinitialspace=True)
+    df_test = pd.read_csv(test_path, header=None, names=column_names, skipinitialspace=True, skiprows=1)  # skip the '|1x3 Cross validator' junk header line
+    df = pd.concat([df_data, df_test], ignore_index=True)  # stack the two splits into one table, renumbering the rows
+
+    df['income'] = df['income'].str.rstrip('.')  # adult.test writes income as '<=50K.'/'>50K.' — strip the trailing dot so both splits share one label
 
     df.replace('?', np.nan, inplace=True)
 
@@ -29,7 +35,7 @@ def load_and_clean_anomalies(filepath):
     labels_per_code = df.groupby('education-num')['education'].nunique()  # count how many different education labels share each education-num code
     if not (labels_per_code == 1).all():
         raise ValueError("education-num no longer matches education 1-to-1, so it can't be safely dropped")
-    df = df.drop(columns=['education-num'])
+    df = df.drop(columns=['education-num', 'fnlwgt'])
 
     return df
 
@@ -87,6 +93,17 @@ def add_age_group(df):
     bins = [0, 20, 30, 40, 50, 60, 70, 150]
     labels = ['<20', '20-29', '30-39', '40-49', '50-59', '60-69', '70+']
     df['age-group'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
+    return df
+
+
+# Adds a True/False column for each field that had missing values, marking
+# which rows the Bayesian imputer filled in, so the dashboard can show the
+# imputation's footprint even though the exported values are now complete.
+def add_imputed_flags(df, df_raw):
+    df = df.copy()
+    missing_cols = df_raw.columns[df_raw.isna().any()]  # list only the columns that actually had blanks in the raw data
+    for col in missing_cols:  # go through each of those columns, to flag its imputed rows
+        df[f'{col}-imputed'] = df_raw[col].isna().values  # a row is 'imputed' wherever the raw value was blank; .values keeps it aligned by position
     return df
 
 
