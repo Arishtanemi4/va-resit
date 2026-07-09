@@ -1,0 +1,1805 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20253.26.0403.1112                               -->
+<workbook original-version='18.1' source-build='2025.3.5 (20253.26.0403.1112)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelSharedDimensions.true...ObjectModelSharedDimensions />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='adult_tableau.csv+ (Multiple Connections)' inline='true' name='federated.0lntkoz0mgbfi611gyolj1lzyswx' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='adult_tableau' name='textscan.0olgdmt0e2025619809f70rmiqi2'>
+            <connection class='textscan' directory='E:/uob/va-resit/data/processed' filename='adult_tableau.csv' password='' server='' />
+          </named-connection>
+          <named-connection caption='pca_loadings' name='textscan.0tl97v21073zpn1eth5211fc2307'>
+            <connection class='textscan' directory='E:/uob/va-resit/data/processed' filename='pca_loadings.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation type='collection'>
+          <_.fcp.ObjectModelSharedDimensions.true...relation connection='textscan.0olgdmt0e2025619809f70rmiqi2' name='adult_tableau.csv' table='[adult_tableau#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_TV' separator=','>
+              <column datatype='integer' name='age' ordinal='0' />
+              <column datatype='string' name='workclass' ordinal='1' />
+              <column datatype='integer' name='fnlwgt' ordinal='2' />
+              <column datatype='integer' name='education-num' ordinal='3' />
+              <column datatype='string' name='marital-status' ordinal='4' />
+              <column datatype='string' name='occupation' ordinal='5' />
+              <column datatype='string' name='relationship' ordinal='6' />
+              <column datatype='string' name='race' ordinal='7' />
+              <column datatype='string' name='sex' ordinal='8' />
+              <column datatype='integer' name='capital-gain' ordinal='9' />
+              <column datatype='integer' name='capital-loss' ordinal='10' />
+              <column datatype='integer' name='hours-per-week' ordinal='11' />
+              <column datatype='string' name='native-country' ordinal='12' />
+              <column datatype='string' name='income' ordinal='13' />
+              <column datatype='real' name='PC1' ordinal='14' />
+              <column datatype='real' name='PC2' ordinal='15' />
+              <column datatype='real' name='tSNE1' ordinal='16' />
+              <column datatype='real' name='tSNE2' ordinal='17' />
+            </columns>
+          </_.fcp.ObjectModelSharedDimensions.true...relation>
+          <_.fcp.ObjectModelSharedDimensions.true...relation connection='textscan.0tl97v21073zpn1eth5211fc2307' name='pca_loadings.csv' table='[pca_loadings#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_TV' separator=','>
+              <column datatype='string' name='F1' ordinal='0' />
+              <column datatype='real' name='age' ordinal='1' />
+              <column datatype='real' name='fnlwgt' ordinal='2' />
+              <column datatype='real' name='education-num' ordinal='3' />
+              <column datatype='real' name='capital-gain' ordinal='4' />
+              <column datatype='real' name='capital-loss' ordinal='5' />
+              <column datatype='real' name='hours-per-week' ordinal='6' />
+              <column datatype='real' name='workclass_Local-gov' ordinal='7' />
+              <column datatype='real' name='workclass_Never-worked' ordinal='8' />
+              <column datatype='real' name='workclass_Private' ordinal='9' />
+              <column datatype='real' name='workclass_Self-emp-inc' ordinal='10' />
+              <column datatype='real' name='workclass_Self-emp-not-inc' ordinal='11' />
+              <column datatype='real' name='workclass_State-gov' ordinal='12' />
+              <column datatype='real' name='workclass_Without-pay' ordinal='13' />
+              <column datatype='real' name='marital-status_Married-AF-spouse' ordinal='14' />
+              <column datatype='real' name='marital-status_Married-civ-spouse' ordinal='15' />
+              <column datatype='real' name='marital-status_Married-spouse-absent' ordinal='16' />
+              <column datatype='real' name='marital-status_Never-married' ordinal='17' />
+              <column datatype='real' name='marital-status_Separated' ordinal='18' />
+              <column datatype='real' name='marital-status_Widowed' ordinal='19' />
+              <column datatype='real' name='occupation_Armed-Forces' ordinal='20' />
+              <column datatype='real' name='occupation_Craft-repair' ordinal='21' />
+              <column datatype='real' name='occupation_Exec-managerial' ordinal='22' />
+              <column datatype='real' name='occupation_Farming-fishing' ordinal='23' />
+              <column datatype='real' name='occupation_Handlers-cleaners' ordinal='24' />
+              <column datatype='real' name='occupation_Machine-op-inspct' ordinal='25' />
+              <column datatype='real' name='occupation_Other-service' ordinal='26' />
+              <column datatype='real' name='occupation_Priv-house-serv' ordinal='27' />
+              <column datatype='real' name='occupation_Prof-specialty' ordinal='28' />
+              <column datatype='real' name='occupation_Protective-serv' ordinal='29' />
+              <column datatype='real' name='occupation_Sales' ordinal='30' />
+              <column datatype='real' name='occupation_Tech-support' ordinal='31' />
+              <column datatype='real' name='occupation_Transport-moving' ordinal='32' />
+              <column datatype='real' name='relationship_Not-in-family' ordinal='33' />
+              <column datatype='real' name='relationship_Other-relative' ordinal='34' />
+              <column datatype='real' name='relationship_Own-child' ordinal='35' />
+              <column datatype='real' name='relationship_Unmarried' ordinal='36' />
+              <column datatype='real' name='relationship_Wife' ordinal='37' />
+              <column datatype='real' name='race_Asian-Pac-Islander' ordinal='38' />
+              <column datatype='real' name='race_Black' ordinal='39' />
+              <column datatype='real' name='race_Other' ordinal='40' />
+              <column datatype='real' name='race_White' ordinal='41' />
+              <column datatype='real' name='sex_Male' ordinal='42' />
+              <column datatype='real' name='native-country_Canada' ordinal='43' />
+              <column datatype='real' name='native-country_China' ordinal='44' />
+              <column datatype='real' name='native-country_Columbia' ordinal='45' />
+              <column datatype='real' name='native-country_Cuba' ordinal='46' />
+              <column datatype='real' name='native-country_Dominican-Republic' ordinal='47' />
+              <column datatype='real' name='native-country_Ecuador' ordinal='48' />
+              <column datatype='real' name='native-country_El-Salvador' ordinal='49' />
+              <column datatype='real' name='native-country_England' ordinal='50' />
+              <column datatype='real' name='native-country_France' ordinal='51' />
+              <column datatype='real' name='native-country_Germany' ordinal='52' />
+              <column datatype='real' name='native-country_Greece' ordinal='53' />
+              <column datatype='real' name='native-country_Guatemala' ordinal='54' />
+              <column datatype='real' name='native-country_Haiti' ordinal='55' />
+              <column datatype='real' name='native-country_Holand-Netherlands' ordinal='56' />
+              <column datatype='real' name='native-country_Honduras' ordinal='57' />
+              <column datatype='real' name='native-country_Hong' ordinal='58' />
+              <column datatype='real' name='native-country_Hungary' ordinal='59' />
+              <column datatype='real' name='native-country_India' ordinal='60' />
+              <column datatype='real' name='native-country_Iran' ordinal='61' />
+              <column datatype='real' name='native-country_Ireland' ordinal='62' />
+              <column datatype='real' name='native-country_Italy' ordinal='63' />
+              <column datatype='real' name='native-country_Jamaica' ordinal='64' />
+              <column datatype='real' name='native-country_Japan' ordinal='65' />
+              <column datatype='real' name='native-country_Laos' ordinal='66' />
+              <column datatype='real' name='native-country_Mexico' ordinal='67' />
+              <column datatype='real' name='native-country_Nicaragua' ordinal='68' />
+              <column datatype='real' name='native-country_Outlying-US(Guam-USVI-etc)' ordinal='69' />
+              <column datatype='real' name='native-country_Peru' ordinal='70' />
+              <column datatype='real' name='native-country_Philippines' ordinal='71' />
+              <column datatype='real' name='native-country_Poland' ordinal='72' />
+              <column datatype='real' name='native-country_Portugal' ordinal='73' />
+              <column datatype='real' name='native-country_Puerto-Rico' ordinal='74' />
+              <column datatype='real' name='native-country_Scotland' ordinal='75' />
+              <column datatype='real' name='native-country_South' ordinal='76' />
+              <column datatype='real' name='native-country_Taiwan' ordinal='77' />
+              <column datatype='real' name='native-country_Thailand' ordinal='78' />
+              <column datatype='real' name='native-country_Trinadad&amp;Tobago' ordinal='79' />
+              <column datatype='real' name='native-country_United-States' ordinal='80' />
+              <column datatype='real' name='native-country_Vietnam' ordinal='81' />
+              <column datatype='real' name='native-country_Yugoslavia' ordinal='82' />
+            </columns>
+          </_.fcp.ObjectModelSharedDimensions.true...relation>
+        </relation>
+        <cols>
+          <map key='[F1]' value='[pca_loadings.csv].[F1]' />
+          <map key='[PC1]' value='[adult_tableau.csv].[PC1]' />
+          <map key='[PC2]' value='[adult_tableau.csv].[PC2]' />
+          <map key='[age (pca_loadings.csv)]' value='[pca_loadings.csv].[age]' />
+          <map key='[age]' value='[adult_tableau.csv].[age]' />
+          <map key='[capital-gain (pca_loadings.csv)]' value='[pca_loadings.csv].[capital-gain]' />
+          <map key='[capital-gain]' value='[adult_tableau.csv].[capital-gain]' />
+          <map key='[capital-loss (pca_loadings.csv)]' value='[pca_loadings.csv].[capital-loss]' />
+          <map key='[capital-loss]' value='[adult_tableau.csv].[capital-loss]' />
+          <map key='[education-num (pca_loadings.csv)]' value='[pca_loadings.csv].[education-num]' />
+          <map key='[education-num]' value='[adult_tableau.csv].[education-num]' />
+          <map key='[fnlwgt (pca_loadings.csv)]' value='[pca_loadings.csv].[fnlwgt]' />
+          <map key='[fnlwgt]' value='[adult_tableau.csv].[fnlwgt]' />
+          <map key='[hours-per-week (pca_loadings.csv)]' value='[pca_loadings.csv].[hours-per-week]' />
+          <map key='[hours-per-week]' value='[adult_tableau.csv].[hours-per-week]' />
+          <map key='[income]' value='[adult_tableau.csv].[income]' />
+          <map key='[marital-status]' value='[adult_tableau.csv].[marital-status]' />
+          <map key='[marital-status_Married-AF-spouse]' value='[pca_loadings.csv].[marital-status_Married-AF-spouse]' />
+          <map key='[marital-status_Married-civ-spouse]' value='[pca_loadings.csv].[marital-status_Married-civ-spouse]' />
+          <map key='[marital-status_Married-spouse-absent]' value='[pca_loadings.csv].[marital-status_Married-spouse-absent]' />
+          <map key='[marital-status_Never-married]' value='[pca_loadings.csv].[marital-status_Never-married]' />
+          <map key='[marital-status_Separated]' value='[pca_loadings.csv].[marital-status_Separated]' />
+          <map key='[marital-status_Widowed]' value='[pca_loadings.csv].[marital-status_Widowed]' />
+          <map key='[native-country]' value='[adult_tableau.csv].[native-country]' />
+          <map key='[native-country_Canada]' value='[pca_loadings.csv].[native-country_Canada]' />
+          <map key='[native-country_China]' value='[pca_loadings.csv].[native-country_China]' />
+          <map key='[native-country_Columbia]' value='[pca_loadings.csv].[native-country_Columbia]' />
+          <map key='[native-country_Cuba]' value='[pca_loadings.csv].[native-country_Cuba]' />
+          <map key='[native-country_Dominican-Republic]' value='[pca_loadings.csv].[native-country_Dominican-Republic]' />
+          <map key='[native-country_Ecuador]' value='[pca_loadings.csv].[native-country_Ecuador]' />
+          <map key='[native-country_El-Salvador]' value='[pca_loadings.csv].[native-country_El-Salvador]' />
+          <map key='[native-country_England]' value='[pca_loadings.csv].[native-country_England]' />
+          <map key='[native-country_France]' value='[pca_loadings.csv].[native-country_France]' />
+          <map key='[native-country_Germany]' value='[pca_loadings.csv].[native-country_Germany]' />
+          <map key='[native-country_Greece]' value='[pca_loadings.csv].[native-country_Greece]' />
+          <map key='[native-country_Guatemala]' value='[pca_loadings.csv].[native-country_Guatemala]' />
+          <map key='[native-country_Haiti]' value='[pca_loadings.csv].[native-country_Haiti]' />
+          <map key='[native-country_Holand-Netherlands]' value='[pca_loadings.csv].[native-country_Holand-Netherlands]' />
+          <map key='[native-country_Honduras]' value='[pca_loadings.csv].[native-country_Honduras]' />
+          <map key='[native-country_Hong]' value='[pca_loadings.csv].[native-country_Hong]' />
+          <map key='[native-country_Hungary]' value='[pca_loadings.csv].[native-country_Hungary]' />
+          <map key='[native-country_India]' value='[pca_loadings.csv].[native-country_India]' />
+          <map key='[native-country_Iran]' value='[pca_loadings.csv].[native-country_Iran]' />
+          <map key='[native-country_Ireland]' value='[pca_loadings.csv].[native-country_Ireland]' />
+          <map key='[native-country_Italy]' value='[pca_loadings.csv].[native-country_Italy]' />
+          <map key='[native-country_Jamaica]' value='[pca_loadings.csv].[native-country_Jamaica]' />
+          <map key='[native-country_Japan]' value='[pca_loadings.csv].[native-country_Japan]' />
+          <map key='[native-country_Laos]' value='[pca_loadings.csv].[native-country_Laos]' />
+          <map key='[native-country_Mexico]' value='[pca_loadings.csv].[native-country_Mexico]' />
+          <map key='[native-country_Nicaragua]' value='[pca_loadings.csv].[native-country_Nicaragua]' />
+          <map key='[native-country_Outlying-US(Guam-USVI-etc)]' value='[pca_loadings.csv].[native-country_Outlying-US(Guam-USVI-etc)]' />
+          <map key='[native-country_Peru]' value='[pca_loadings.csv].[native-country_Peru]' />
+          <map key='[native-country_Philippines]' value='[pca_loadings.csv].[native-country_Philippines]' />
+          <map key='[native-country_Poland]' value='[pca_loadings.csv].[native-country_Poland]' />
+          <map key='[native-country_Portugal]' value='[pca_loadings.csv].[native-country_Portugal]' />
+          <map key='[native-country_Puerto-Rico]' value='[pca_loadings.csv].[native-country_Puerto-Rico]' />
+          <map key='[native-country_Scotland]' value='[pca_loadings.csv].[native-country_Scotland]' />
+          <map key='[native-country_South]' value='[pca_loadings.csv].[native-country_South]' />
+          <map key='[native-country_Taiwan]' value='[pca_loadings.csv].[native-country_Taiwan]' />
+          <map key='[native-country_Thailand]' value='[pca_loadings.csv].[native-country_Thailand]' />
+          <map key='[native-country_Trinadad&amp;Tobago]' value='[pca_loadings.csv].[native-country_Trinadad&amp;Tobago]' />
+          <map key='[native-country_United-States]' value='[pca_loadings.csv].[native-country_United-States]' />
+          <map key='[native-country_Vietnam]' value='[pca_loadings.csv].[native-country_Vietnam]' />
+          <map key='[native-country_Yugoslavia]' value='[pca_loadings.csv].[native-country_Yugoslavia]' />
+          <map key='[occupation]' value='[adult_tableau.csv].[occupation]' />
+          <map key='[occupation_Armed-Forces]' value='[pca_loadings.csv].[occupation_Armed-Forces]' />
+          <map key='[occupation_Craft-repair]' value='[pca_loadings.csv].[occupation_Craft-repair]' />
+          <map key='[occupation_Exec-managerial]' value='[pca_loadings.csv].[occupation_Exec-managerial]' />
+          <map key='[occupation_Farming-fishing]' value='[pca_loadings.csv].[occupation_Farming-fishing]' />
+          <map key='[occupation_Handlers-cleaners]' value='[pca_loadings.csv].[occupation_Handlers-cleaners]' />
+          <map key='[occupation_Machine-op-inspct]' value='[pca_loadings.csv].[occupation_Machine-op-inspct]' />
+          <map key='[occupation_Other-service]' value='[pca_loadings.csv].[occupation_Other-service]' />
+          <map key='[occupation_Priv-house-serv]' value='[pca_loadings.csv].[occupation_Priv-house-serv]' />
+          <map key='[occupation_Prof-specialty]' value='[pca_loadings.csv].[occupation_Prof-specialty]' />
+          <map key='[occupation_Protective-serv]' value='[pca_loadings.csv].[occupation_Protective-serv]' />
+          <map key='[occupation_Sales]' value='[pca_loadings.csv].[occupation_Sales]' />
+          <map key='[occupation_Tech-support]' value='[pca_loadings.csv].[occupation_Tech-support]' />
+          <map key='[occupation_Transport-moving]' value='[pca_loadings.csv].[occupation_Transport-moving]' />
+          <map key='[race]' value='[adult_tableau.csv].[race]' />
+          <map key='[race_Asian-Pac-Islander]' value='[pca_loadings.csv].[race_Asian-Pac-Islander]' />
+          <map key='[race_Black]' value='[pca_loadings.csv].[race_Black]' />
+          <map key='[race_Other]' value='[pca_loadings.csv].[race_Other]' />
+          <map key='[race_White]' value='[pca_loadings.csv].[race_White]' />
+          <map key='[relationship]' value='[adult_tableau.csv].[relationship]' />
+          <map key='[relationship_Not-in-family]' value='[pca_loadings.csv].[relationship_Not-in-family]' />
+          <map key='[relationship_Other-relative]' value='[pca_loadings.csv].[relationship_Other-relative]' />
+          <map key='[relationship_Own-child]' value='[pca_loadings.csv].[relationship_Own-child]' />
+          <map key='[relationship_Unmarried]' value='[pca_loadings.csv].[relationship_Unmarried]' />
+          <map key='[relationship_Wife]' value='[pca_loadings.csv].[relationship_Wife]' />
+          <map key='[sex]' value='[adult_tableau.csv].[sex]' />
+          <map key='[sex_Male]' value='[pca_loadings.csv].[sex_Male]' />
+          <map key='[tSNE1]' value='[adult_tableau.csv].[tSNE1]' />
+          <map key='[tSNE2]' value='[adult_tableau.csv].[tSNE2]' />
+          <map key='[workclass]' value='[adult_tableau.csv].[workclass]' />
+          <map key='[workclass_Local-gov]' value='[pca_loadings.csv].[workclass_Local-gov]' />
+          <map key='[workclass_Never-worked]' value='[pca_loadings.csv].[workclass_Never-worked]' />
+          <map key='[workclass_Private]' value='[pca_loadings.csv].[workclass_Private]' />
+          <map key='[workclass_Self-emp-inc]' value='[pca_loadings.csv].[workclass_Self-emp-inc]' />
+          <map key='[workclass_Self-emp-not-inc]' value='[pca_loadings.csv].[workclass_Self-emp-not-inc]' />
+          <map key='[workclass_State-gov]' value='[pca_loadings.csv].[workclass_State-gov]' />
+          <map key='[workclass_Without-pay]' value='[pca_loadings.csv].[workclass_Without-pay]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_TV&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_TV&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>age</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[age]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>age</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>workclass</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[workclass]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>workclass</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>fnlwgt</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[fnlwgt]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>fnlwgt</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>education-num</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[education-num]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>education-num</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>marital-status</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[marital-status]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>marital-status</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[occupation]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>occupation</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>relationship</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[relationship]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>relationship</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>race</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[race]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>race</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>sex</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[sex]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>sex</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>capital-gain</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[capital-gain]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>capital-gain</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>capital-loss</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[capital-loss]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>capital-loss</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>hours-per-week</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[hours-per-week]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>hours-per-week</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[native-country]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>native-country</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>income</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[income]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>income</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>PC1</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PC1]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>PC1</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>PC2</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PC2]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>PC2</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>tSNE1</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[tSNE1]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>tSNE1</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>tSNE2</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[tSNE2]</local-name>
+            <parent-name>[adult_tableau.csv]</parent-name>
+            <remote-alias>tSNE2</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>F1</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[F1]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>F1</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>age</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[age (pca_loadings.csv)]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>age</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>fnlwgt</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[fnlwgt (pca_loadings.csv)]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>fnlwgt</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>education-num</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[education-num (pca_loadings.csv)]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>education-num</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>capital-gain</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[capital-gain (pca_loadings.csv)]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>capital-gain</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>capital-loss</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[capital-loss (pca_loadings.csv)]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>capital-loss</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>hours-per-week</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[hours-per-week (pca_loadings.csv)]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>hours-per-week</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>workclass_Local-gov</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[workclass_Local-gov]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>workclass_Local-gov</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>workclass_Never-worked</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[workclass_Never-worked]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>workclass_Never-worked</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>workclass_Private</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[workclass_Private]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>workclass_Private</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>workclass_Self-emp-inc</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[workclass_Self-emp-inc]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>workclass_Self-emp-inc</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>workclass_Self-emp-not-inc</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[workclass_Self-emp-not-inc]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>workclass_Self-emp-not-inc</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>workclass_State-gov</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[workclass_State-gov]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>workclass_State-gov</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>workclass_Without-pay</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[workclass_Without-pay]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>workclass_Without-pay</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>marital-status_Married-AF-spouse</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[marital-status_Married-AF-spouse]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>marital-status_Married-AF-spouse</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>marital-status_Married-civ-spouse</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[marital-status_Married-civ-spouse]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>marital-status_Married-civ-spouse</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>marital-status_Married-spouse-absent</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[marital-status_Married-spouse-absent]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>marital-status_Married-spouse-absent</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>marital-status_Never-married</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[marital-status_Never-married]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>marital-status_Never-married</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>marital-status_Separated</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[marital-status_Separated]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>marital-status_Separated</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>marital-status_Widowed</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[marital-status_Widowed]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>marital-status_Widowed</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Armed-Forces</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Armed-Forces]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Armed-Forces</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Craft-repair</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Craft-repair]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Craft-repair</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Exec-managerial</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Exec-managerial]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Exec-managerial</remote-alias>
+            <ordinal>40</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Farming-fishing</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Farming-fishing]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Farming-fishing</remote-alias>
+            <ordinal>41</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Handlers-cleaners</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Handlers-cleaners]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Handlers-cleaners</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Machine-op-inspct</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Machine-op-inspct]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Machine-op-inspct</remote-alias>
+            <ordinal>43</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Other-service</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Other-service]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Other-service</remote-alias>
+            <ordinal>44</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Priv-house-serv</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Priv-house-serv]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Priv-house-serv</remote-alias>
+            <ordinal>45</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Prof-specialty</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Prof-specialty]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Prof-specialty</remote-alias>
+            <ordinal>46</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Protective-serv</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Protective-serv]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Protective-serv</remote-alias>
+            <ordinal>47</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Sales</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Sales]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Sales</remote-alias>
+            <ordinal>48</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Tech-support</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Tech-support]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Tech-support</remote-alias>
+            <ordinal>49</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>occupation_Transport-moving</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[occupation_Transport-moving]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>occupation_Transport-moving</remote-alias>
+            <ordinal>50</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>relationship_Not-in-family</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[relationship_Not-in-family]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>relationship_Not-in-family</remote-alias>
+            <ordinal>51</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>relationship_Other-relative</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[relationship_Other-relative]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>relationship_Other-relative</remote-alias>
+            <ordinal>52</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>relationship_Own-child</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[relationship_Own-child]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>relationship_Own-child</remote-alias>
+            <ordinal>53</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>relationship_Unmarried</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[relationship_Unmarried]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>relationship_Unmarried</remote-alias>
+            <ordinal>54</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>relationship_Wife</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[relationship_Wife]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>relationship_Wife</remote-alias>
+            <ordinal>55</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>race_Asian-Pac-Islander</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[race_Asian-Pac-Islander]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>race_Asian-Pac-Islander</remote-alias>
+            <ordinal>56</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>race_Black</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[race_Black]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>race_Black</remote-alias>
+            <ordinal>57</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>race_Other</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[race_Other]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>race_Other</remote-alias>
+            <ordinal>58</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>race_White</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[race_White]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>race_White</remote-alias>
+            <ordinal>59</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>sex_Male</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[sex_Male]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>sex_Male</remote-alias>
+            <ordinal>60</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Canada</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Canada]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Canada</remote-alias>
+            <ordinal>61</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_China</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_China]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_China</remote-alias>
+            <ordinal>62</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Columbia</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Columbia]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Columbia</remote-alias>
+            <ordinal>63</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Cuba</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Cuba]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Cuba</remote-alias>
+            <ordinal>64</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Dominican-Republic</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Dominican-Republic]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Dominican-Republic</remote-alias>
+            <ordinal>65</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Ecuador</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Ecuador]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Ecuador</remote-alias>
+            <ordinal>66</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_El-Salvador</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_El-Salvador]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_El-Salvador</remote-alias>
+            <ordinal>67</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_England</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_England]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_England</remote-alias>
+            <ordinal>68</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_France</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_France]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_France</remote-alias>
+            <ordinal>69</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Germany</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Germany]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Germany</remote-alias>
+            <ordinal>70</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Greece</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Greece]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Greece</remote-alias>
+            <ordinal>71</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Guatemala</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Guatemala]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Guatemala</remote-alias>
+            <ordinal>72</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Haiti</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Haiti]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Haiti</remote-alias>
+            <ordinal>73</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Holand-Netherlands</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Holand-Netherlands]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Holand-Netherlands</remote-alias>
+            <ordinal>74</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Honduras</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Honduras]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Honduras</remote-alias>
+            <ordinal>75</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Hong</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Hong]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Hong</remote-alias>
+            <ordinal>76</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Hungary</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Hungary]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Hungary</remote-alias>
+            <ordinal>77</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_India</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_India]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_India</remote-alias>
+            <ordinal>78</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Iran</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Iran]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Iran</remote-alias>
+            <ordinal>79</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Ireland</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Ireland]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Ireland</remote-alias>
+            <ordinal>80</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Italy</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Italy]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Italy</remote-alias>
+            <ordinal>81</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Jamaica</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Jamaica]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Jamaica</remote-alias>
+            <ordinal>82</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Japan</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Japan]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Japan</remote-alias>
+            <ordinal>83</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Laos</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Laos]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Laos</remote-alias>
+            <ordinal>84</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Mexico</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Mexico]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Mexico</remote-alias>
+            <ordinal>85</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Nicaragua</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Nicaragua]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Nicaragua</remote-alias>
+            <ordinal>86</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Outlying-US(Guam-USVI-etc)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Outlying-US(Guam-USVI-etc)]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Outlying-US(Guam-USVI-etc)</remote-alias>
+            <ordinal>87</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Peru</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Peru]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Peru</remote-alias>
+            <ordinal>88</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Philippines</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Philippines]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Philippines</remote-alias>
+            <ordinal>89</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Poland</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Poland]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Poland</remote-alias>
+            <ordinal>90</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Portugal</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Portugal]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Portugal</remote-alias>
+            <ordinal>91</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Puerto-Rico</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Puerto-Rico]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Puerto-Rico</remote-alias>
+            <ordinal>92</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Scotland</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Scotland]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Scotland</remote-alias>
+            <ordinal>93</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_South</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_South]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_South</remote-alias>
+            <ordinal>94</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Taiwan</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Taiwan]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Taiwan</remote-alias>
+            <ordinal>95</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Thailand</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Thailand]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Thailand</remote-alias>
+            <ordinal>96</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Trinadad&amp;Tobago</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Trinadad&amp;Tobago]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Trinadad&amp;Tobago</remote-alias>
+            <ordinal>97</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_United-States</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_United-States]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_United-States</remote-alias>
+            <ordinal>98</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Vietnam</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Vietnam]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Vietnam</remote-alias>
+            <ordinal>99</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+          <_.fcp.ObjectModelSharedDimensions.true...metadata-record class='column'>
+            <remote-name>native-country_Yugoslavia</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[native-country_Yugoslavia]</local-name>
+            <parent-name>[pca_loadings.csv]</parent-name>
+            <remote-alias>native-country_Yugoslavia</remote-alias>
+            <ordinal>100</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]</object-id>
+          </_.fcp.ObjectModelSharedDimensions.true...metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='adult_tableau.csv' datatype='table' name='[__tableau_internal_object_id__].[adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73]' role='measure' type='quantitative' />
+      <column caption='pca_loadings.csv' datatype='table' name='[__tableau_internal_object_id__].[pca_loadings.csv_9000132D12524605ABC485DCEECFB715]' role='measure' type='quantitative' />
+      <column caption='Age (Pca Loadings.Csv)' datatype='real' name='[age (pca_loadings.csv)]' role='measure' type='quantitative' />
+      <column caption='Age' datatype='integer' name='[age]' role='measure' type='quantitative' />
+      <column caption='Capital-Gain (Pca Loadings.Csv)' datatype='real' name='[capital-gain (pca_loadings.csv)]' role='measure' type='quantitative' />
+      <column caption='Capital-Gain' datatype='integer' name='[capital-gain]' role='measure' type='quantitative' />
+      <column caption='Capital-Loss (Pca Loadings.Csv)' datatype='real' name='[capital-loss (pca_loadings.csv)]' role='measure' type='quantitative' />
+      <column caption='Capital-Loss' datatype='integer' name='[capital-loss]' role='measure' type='quantitative' />
+      <column caption='Education-Num (Pca Loadings.Csv)' datatype='real' name='[education-num (pca_loadings.csv)]' role='dimension' type='ordinal' />
+      <column caption='Education-Num' datatype='integer' name='[education-num]' role='dimension' type='ordinal' />
+      <column caption='Fnlwgt (Pca Loadings.Csv)' datatype='real' name='[fnlwgt (pca_loadings.csv)]' role='measure' type='quantitative' />
+      <column caption='Fnlwgt' datatype='integer' name='[fnlwgt]' role='measure' type='quantitative' />
+      <column caption='Hours-Per-Week (Pca Loadings.Csv)' datatype='real' name='[hours-per-week (pca_loadings.csv)]' role='measure' type='quantitative' />
+      <column caption='Hours-Per-Week' datatype='integer' name='[hours-per-week]' role='measure' type='quantitative' />
+      <column caption='Income' datatype='string' name='[income]' role='dimension' type='nominal' />
+      <column caption='Marital-Status' datatype='string' name='[marital-status]' role='dimension' type='nominal' />
+      <column caption='marital-status Married-AF-spouse' datatype='real' name='[marital-status_Married-AF-spouse]' role='measure' type='quantitative' />
+      <column caption='marital-status Married-civ-spouse' datatype='real' name='[marital-status_Married-civ-spouse]' role='measure' type='quantitative' />
+      <column caption='marital-status Married-spouse-absent' datatype='real' name='[marital-status_Married-spouse-absent]' role='measure' type='quantitative' />
+      <column caption='marital-status Never-married' datatype='real' name='[marital-status_Never-married]' role='measure' type='quantitative' />
+      <column caption='marital-status Separated' datatype='real' name='[marital-status_Separated]' role='measure' type='quantitative' />
+      <column caption='marital-status Widowed' datatype='real' name='[marital-status_Widowed]' role='measure' type='quantitative' />
+      <column caption='Native-Country' datatype='string' name='[native-country]' role='dimension' type='nominal' />
+      <column caption='native-country Canada' datatype='real' name='[native-country_Canada]' role='measure' type='quantitative' />
+      <column caption='native-country China' datatype='real' name='[native-country_China]' role='measure' type='quantitative' />
+      <column caption='native-country Columbia' datatype='real' name='[native-country_Columbia]' role='measure' type='quantitative' />
+      <column caption='native-country Cuba' datatype='real' name='[native-country_Cuba]' role='measure' type='quantitative' />
+      <column caption='native-country Dominican-Republic' datatype='real' name='[native-country_Dominican-Republic]' role='measure' type='quantitative' />
+      <column caption='native-country Ecuador' datatype='real' name='[native-country_Ecuador]' role='measure' type='quantitative' />
+      <column caption='native-country El-Salvador' datatype='real' name='[native-country_El-Salvador]' role='measure' type='quantitative' />
+      <column caption='native-country England' datatype='real' name='[native-country_England]' role='measure' type='quantitative' />
+      <column caption='native-country France' datatype='real' name='[native-country_France]' role='measure' type='quantitative' />
+      <column caption='native-country Germany' datatype='real' name='[native-country_Germany]' role='measure' type='quantitative' />
+      <column caption='native-country Greece' datatype='real' name='[native-country_Greece]' role='measure' type='quantitative' />
+      <column caption='native-country Guatemala' datatype='real' name='[native-country_Guatemala]' role='measure' type='quantitative' />
+      <column caption='native-country Haiti' datatype='real' name='[native-country_Haiti]' role='measure' type='quantitative' />
+      <column caption='native-country Holand-Netherlands' datatype='real' name='[native-country_Holand-Netherlands]' role='measure' type='quantitative' />
+      <column caption='native-country Honduras' datatype='real' name='[native-country_Honduras]' role='measure' type='quantitative' />
+      <column caption='native-country Hong' datatype='real' name='[native-country_Hong]' role='measure' type='quantitative' />
+      <column caption='native-country Hungary' datatype='real' name='[native-country_Hungary]' role='measure' type='quantitative' />
+      <column caption='native-country India' datatype='real' name='[native-country_India]' role='measure' type='quantitative' />
+      <column caption='native-country Iran' datatype='real' name='[native-country_Iran]' role='measure' type='quantitative' />
+      <column caption='native-country Ireland' datatype='real' name='[native-country_Ireland]' role='measure' type='quantitative' />
+      <column caption='native-country Italy' datatype='real' name='[native-country_Italy]' role='measure' type='quantitative' />
+      <column caption='native-country Jamaica' datatype='real' name='[native-country_Jamaica]' role='measure' type='quantitative' />
+      <column caption='native-country Japan' datatype='real' name='[native-country_Japan]' role='measure' type='quantitative' />
+      <column caption='native-country Laos' datatype='real' name='[native-country_Laos]' role='measure' type='quantitative' />
+      <column caption='native-country Mexico' datatype='real' name='[native-country_Mexico]' role='measure' type='quantitative' />
+      <column caption='native-country Nicaragua' datatype='real' name='[native-country_Nicaragua]' role='measure' type='quantitative' />
+      <column caption='native-country Outlying-US(Guam-USVI-etc)' datatype='real' name='[native-country_Outlying-US(Guam-USVI-etc)]' role='measure' type='quantitative' />
+      <column caption='native-country Peru' datatype='real' name='[native-country_Peru]' role='measure' type='quantitative' />
+      <column caption='native-country Philippines' datatype='real' name='[native-country_Philippines]' role='measure' type='quantitative' />
+      <column caption='native-country Poland' datatype='real' name='[native-country_Poland]' role='measure' type='quantitative' />
+      <column caption='native-country Portugal' datatype='real' name='[native-country_Portugal]' role='measure' type='quantitative' />
+      <column caption='native-country Puerto-Rico' datatype='real' name='[native-country_Puerto-Rico]' role='measure' type='quantitative' />
+      <column caption='native-country Scotland' datatype='real' name='[native-country_Scotland]' role='measure' type='quantitative' />
+      <column caption='native-country South' datatype='real' name='[native-country_South]' role='measure' type='quantitative' />
+      <column caption='native-country Taiwan' datatype='real' name='[native-country_Taiwan]' role='measure' type='quantitative' />
+      <column caption='native-country Thailand' datatype='real' name='[native-country_Thailand]' role='measure' type='quantitative' />
+      <column caption='native-country Trinadad&amp;Tobago' datatype='real' name='[native-country_Trinadad&amp;Tobago]' role='measure' type='quantitative' />
+      <column caption='native-country United-States' datatype='real' name='[native-country_United-States]' role='measure' type='quantitative' />
+      <column caption='native-country Vietnam' datatype='real' name='[native-country_Vietnam]' role='measure' type='quantitative' />
+      <column caption='native-country Yugoslavia' datatype='real' name='[native-country_Yugoslavia]' role='measure' type='quantitative' />
+      <column caption='Occupation' datatype='string' name='[occupation]' role='dimension' type='nominal' />
+      <column caption='occupation Armed-Forces' datatype='real' name='[occupation_Armed-Forces]' role='measure' type='quantitative' />
+      <column caption='occupation Craft-repair' datatype='real' name='[occupation_Craft-repair]' role='measure' type='quantitative' />
+      <column caption='occupation Exec-managerial' datatype='real' name='[occupation_Exec-managerial]' role='measure' type='quantitative' />
+      <column caption='occupation Farming-fishing' datatype='real' name='[occupation_Farming-fishing]' role='measure' type='quantitative' />
+      <column caption='occupation Handlers-cleaners' datatype='real' name='[occupation_Handlers-cleaners]' role='measure' type='quantitative' />
+      <column caption='occupation Machine-op-inspct' datatype='real' name='[occupation_Machine-op-inspct]' role='measure' type='quantitative' />
+      <column caption='occupation Other-service' datatype='real' name='[occupation_Other-service]' role='measure' type='quantitative' />
+      <column caption='occupation Priv-house-serv' datatype='real' name='[occupation_Priv-house-serv]' role='measure' type='quantitative' />
+      <column caption='occupation Prof-specialty' datatype='real' name='[occupation_Prof-specialty]' role='measure' type='quantitative' />
+      <column caption='occupation Protective-serv' datatype='real' name='[occupation_Protective-serv]' role='measure' type='quantitative' />
+      <column caption='occupation Sales' datatype='real' name='[occupation_Sales]' role='measure' type='quantitative' />
+      <column caption='occupation Tech-support' datatype='real' name='[occupation_Tech-support]' role='measure' type='quantitative' />
+      <column caption='occupation Transport-moving' datatype='real' name='[occupation_Transport-moving]' role='measure' type='quantitative' />
+      <column caption='Race' datatype='string' name='[race]' role='dimension' type='nominal' />
+      <column caption='race Asian-Pac-Islander' datatype='real' name='[race_Asian-Pac-Islander]' role='measure' type='quantitative' />
+      <column caption='race Black' datatype='real' name='[race_Black]' role='measure' type='quantitative' />
+      <column caption='race Other' datatype='real' name='[race_Other]' role='measure' type='quantitative' />
+      <column caption='race White' datatype='real' name='[race_White]' role='measure' type='quantitative' />
+      <column caption='Relationship' datatype='string' name='[relationship]' role='dimension' type='nominal' />
+      <column caption='relationship Not-in-family' datatype='real' name='[relationship_Not-in-family]' role='measure' type='quantitative' />
+      <column caption='relationship Other-relative' datatype='real' name='[relationship_Other-relative]' role='measure' type='quantitative' />
+      <column caption='relationship Own-child' datatype='real' name='[relationship_Own-child]' role='measure' type='quantitative' />
+      <column caption='relationship Unmarried' datatype='real' name='[relationship_Unmarried]' role='measure' type='quantitative' />
+      <column caption='relationship Wife' datatype='real' name='[relationship_Wife]' role='measure' type='quantitative' />
+      <column caption='Sex' datatype='string' name='[sex]' role='dimension' type='nominal' />
+      <column caption='sex Male' datatype='real' name='[sex_Male]' role='measure' type='quantitative' />
+      <column caption='Workclass' datatype='string' name='[workclass]' role='dimension' type='nominal' />
+      <column caption='workclass Local-gov' datatype='real' name='[workclass_Local-gov]' role='measure' type='quantitative' />
+      <column caption='workclass Never-worked' datatype='real' name='[workclass_Never-worked]' role='measure' type='quantitative' />
+      <column caption='workclass Private' datatype='real' name='[workclass_Private]' role='measure' type='quantitative' />
+      <column caption='workclass Self-emp-inc' datatype='real' name='[workclass_Self-emp-inc]' role='measure' type='quantitative' />
+      <column caption='workclass Self-emp-not-inc' datatype='real' name='[workclass_Self-emp-not-inc]' role='measure' type='quantitative' />
+      <column caption='workclass State-gov' datatype='real' name='[workclass_State-gov]' role='measure' type='quantitative' />
+      <column caption='workclass Without-pay' datatype='real' name='[workclass_Without-pay]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <date-options start-of-week='monday' />
+      <object-graph>
+        <objects>
+          <_.fcp.ObjectModelSharedDimensions.true...object caption='adult_tableau.csv' id='adult_tableau.csv_5BA3CE69978C48639D2CB7FC5A891E73'>
+            <properties context=''>
+              <relation connection='textscan.0olgdmt0e2025619809f70rmiqi2' name='adult_tableau.csv' table='[adult_tableau#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_TV' separator=','>
+                  <column datatype='integer' name='age' ordinal='0' />
+                  <column datatype='string' name='workclass' ordinal='1' />
+                  <column datatype='integer' name='fnlwgt' ordinal='2' />
+                  <column datatype='integer' name='education-num' ordinal='3' />
+                  <column datatype='string' name='marital-status' ordinal='4' />
+                  <column datatype='string' name='occupation' ordinal='5' />
+                  <column datatype='string' name='relationship' ordinal='6' />
+                  <column datatype='string' name='race' ordinal='7' />
+                  <column datatype='string' name='sex' ordinal='8' />
+                  <column datatype='integer' name='capital-gain' ordinal='9' />
+                  <column datatype='integer' name='capital-loss' ordinal='10' />
+                  <column datatype='integer' name='hours-per-week' ordinal='11' />
+                  <column datatype='string' name='native-country' ordinal='12' />
+                  <column datatype='string' name='income' ordinal='13' />
+                  <column datatype='real' name='PC1' ordinal='14' />
+                  <column datatype='real' name='PC2' ordinal='15' />
+                  <column datatype='real' name='tSNE1' ordinal='16' />
+                  <column datatype='real' name='tSNE2' ordinal='17' />
+                </columns>
+              </relation>
+            </properties>
+          </_.fcp.ObjectModelSharedDimensions.true...object>
+          <_.fcp.ObjectModelSharedDimensions.true...object caption='pca_loadings.csv' id='pca_loadings.csv_9000132D12524605ABC485DCEECFB715'>
+            <properties context=''>
+              <relation connection='textscan.0tl97v21073zpn1eth5211fc2307' name='pca_loadings.csv' table='[pca_loadings#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_TV' separator=','>
+                  <column datatype='string' name='F1' ordinal='0' />
+                  <column datatype='real' name='age' ordinal='1' />
+                  <column datatype='real' name='fnlwgt' ordinal='2' />
+                  <column datatype='real' name='education-num' ordinal='3' />
+                  <column datatype='real' name='capital-gain' ordinal='4' />
+                  <column datatype='real' name='capital-loss' ordinal='5' />
+                  <column datatype='real' name='hours-per-week' ordinal='6' />
+                  <column datatype='real' name='workclass_Local-gov' ordinal='7' />
+                  <column datatype='real' name='workclass_Never-worked' ordinal='8' />
+                  <column datatype='real' name='workclass_Private' ordinal='9' />
+                  <column datatype='real' name='workclass_Self-emp-inc' ordinal='10' />
+                  <column datatype='real' name='workclass_Self-emp-not-inc' ordinal='11' />
+                  <column datatype='real' name='workclass_State-gov' ordinal='12' />
+                  <column datatype='real' name='workclass_Without-pay' ordinal='13' />
+                  <column datatype='real' name='marital-status_Married-AF-spouse' ordinal='14' />
+                  <column datatype='real' name='marital-status_Married-civ-spouse' ordinal='15' />
+                  <column datatype='real' name='marital-status_Married-spouse-absent' ordinal='16' />
+                  <column datatype='real' name='marital-status_Never-married' ordinal='17' />
+                  <column datatype='real' name='marital-status_Separated' ordinal='18' />
+                  <column datatype='real' name='marital-status_Widowed' ordinal='19' />
+                  <column datatype='real' name='occupation_Armed-Forces' ordinal='20' />
+                  <column datatype='real' name='occupation_Craft-repair' ordinal='21' />
+                  <column datatype='real' name='occupation_Exec-managerial' ordinal='22' />
+                  <column datatype='real' name='occupation_Farming-fishing' ordinal='23' />
+                  <column datatype='real' name='occupation_Handlers-cleaners' ordinal='24' />
+                  <column datatype='real' name='occupation_Machine-op-inspct' ordinal='25' />
+                  <column datatype='real' name='occupation_Other-service' ordinal='26' />
+                  <column datatype='real' name='occupation_Priv-house-serv' ordinal='27' />
+                  <column datatype='real' name='occupation_Prof-specialty' ordinal='28' />
+                  <column datatype='real' name='occupation_Protective-serv' ordinal='29' />
+                  <column datatype='real' name='occupation_Sales' ordinal='30' />
+                  <column datatype='real' name='occupation_Tech-support' ordinal='31' />
+                  <column datatype='real' name='occupation_Transport-moving' ordinal='32' />
+                  <column datatype='real' name='relationship_Not-in-family' ordinal='33' />
+                  <column datatype='real' name='relationship_Other-relative' ordinal='34' />
+                  <column datatype='real' name='relationship_Own-child' ordinal='35' />
+                  <column datatype='real' name='relationship_Unmarried' ordinal='36' />
+                  <column datatype='real' name='relationship_Wife' ordinal='37' />
+                  <column datatype='real' name='race_Asian-Pac-Islander' ordinal='38' />
+                  <column datatype='real' name='race_Black' ordinal='39' />
+                  <column datatype='real' name='race_Other' ordinal='40' />
+                  <column datatype='real' name='race_White' ordinal='41' />
+                  <column datatype='real' name='sex_Male' ordinal='42' />
+                  <column datatype='real' name='native-country_Canada' ordinal='43' />
+                  <column datatype='real' name='native-country_China' ordinal='44' />
+                  <column datatype='real' name='native-country_Columbia' ordinal='45' />
+                  <column datatype='real' name='native-country_Cuba' ordinal='46' />
+                  <column datatype='real' name='native-country_Dominican-Republic' ordinal='47' />
+                  <column datatype='real' name='native-country_Ecuador' ordinal='48' />
+                  <column datatype='real' name='native-country_El-Salvador' ordinal='49' />
+                  <column datatype='real' name='native-country_England' ordinal='50' />
+                  <column datatype='real' name='native-country_France' ordinal='51' />
+                  <column datatype='real' name='native-country_Germany' ordinal='52' />
+                  <column datatype='real' name='native-country_Greece' ordinal='53' />
+                  <column datatype='real' name='native-country_Guatemala' ordinal='54' />
+                  <column datatype='real' name='native-country_Haiti' ordinal='55' />
+                  <column datatype='real' name='native-country_Holand-Netherlands' ordinal='56' />
+                  <column datatype='real' name='native-country_Honduras' ordinal='57' />
+                  <column datatype='real' name='native-country_Hong' ordinal='58' />
+                  <column datatype='real' name='native-country_Hungary' ordinal='59' />
+                  <column datatype='real' name='native-country_India' ordinal='60' />
+                  <column datatype='real' name='native-country_Iran' ordinal='61' />
+                  <column datatype='real' name='native-country_Ireland' ordinal='62' />
+                  <column datatype='real' name='native-country_Italy' ordinal='63' />
+                  <column datatype='real' name='native-country_Jamaica' ordinal='64' />
+                  <column datatype='real' name='native-country_Japan' ordinal='65' />
+                  <column datatype='real' name='native-country_Laos' ordinal='66' />
+                  <column datatype='real' name='native-country_Mexico' ordinal='67' />
+                  <column datatype='real' name='native-country_Nicaragua' ordinal='68' />
+                  <column datatype='real' name='native-country_Outlying-US(Guam-USVI-etc)' ordinal='69' />
+                  <column datatype='real' name='native-country_Peru' ordinal='70' />
+                  <column datatype='real' name='native-country_Philippines' ordinal='71' />
+                  <column datatype='real' name='native-country_Poland' ordinal='72' />
+                  <column datatype='real' name='native-country_Portugal' ordinal='73' />
+                  <column datatype='real' name='native-country_Puerto-Rico' ordinal='74' />
+                  <column datatype='real' name='native-country_Scotland' ordinal='75' />
+                  <column datatype='real' name='native-country_South' ordinal='76' />
+                  <column datatype='real' name='native-country_Taiwan' ordinal='77' />
+                  <column datatype='real' name='native-country_Thailand' ordinal='78' />
+                  <column datatype='real' name='native-country_Trinadad&amp;Tobago' ordinal='79' />
+                  <column datatype='real' name='native-country_United-States' ordinal='80' />
+                  <column datatype='real' name='native-country_Vietnam' ordinal='81' />
+                  <column datatype='real' name='native-country_Yugoslavia' ordinal='82' />
+                </columns>
+              </relation>
+            </properties>
+          </_.fcp.ObjectModelSharedDimensions.true...object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{B6F99172-93B7-4CBE-8F45-39AF52219FFD}' />
+    </worksheet>
+  </worksheets>
+  <windows saved-dpi-scale-factor='1.25' source-height='37'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A157EB21-DB8E-4D15-BD65-E1EAF8142ED2}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABJ0AAASdAHeZh94
+      AAACFUlEQVR4nO3TMQEAIAzAMMC/5yFjRxMFfXpnZg5Eve0A2GQA0gxAmgFIMwBpBiDNAKQZ
+      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
+      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQD
+      kGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBp
+      BiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA
+      0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDN
+      AKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxA
+      mgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZ
+      gDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFI
+      MwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKQZgDQDkGYA0gxAmgFIMwBpBiDNAKR9Y+0F
+      fBUOM1sAAAAASUVORK5CYII=
+    </thumbnail>
+  </thumbnails>
+</workbook>

@@ -6,6 +6,8 @@ from preprocess import *
 from dim_reduce import *
 
 
+# Runs every pipeline step in order, from the raw census file to the
+# finished, Tableau-ready CSVs.
 def main():
     base_dir = Path(__file__).resolve().parent.parent
     raw_path = base_dir / 'data' / 'raw' / 'adult.data'
@@ -17,16 +19,20 @@ def main():
 
     df_reduced = drop_redundant_features(df_raw)
 
-    X_enc, y_enc = encode_categorical_data(df_reduced)
+    X_ordinal, category_maps = encode_ordinal_categoricals(df_reduced)
 
-    X_imputed = impute_missing_data_bayesian(X_enc)
+    X_ordinal_imputed = impute_missing_data_bayesian(X_ordinal)
 
-    X_scaled = scale_data(X_imputed)
+    df_imputed = decode_imputed_categoricals(df_reduced, X_ordinal_imputed, category_maps)
+
+    X_enc, y_enc = encode_categorical_data(df_imputed)
+
+    X_scaled = scale_data(X_enc)
 
     pca_df, loadings_df = apply_pca(X_scaled)
     tsne_df = apply_tsne(X_scaled)
 
-    final_df = pd.concat([df_reduced.reset_index(drop=True), pca_df, tsne_df], axis=1)
+    final_df = pd.concat([df_imputed.reset_index(drop=True), pca_df, tsne_df], axis=1)
     loadings_df.to_csv(processed_dir / 'pca_loadings.csv', index=True)
 
     final_df.to_csv(out_path, index=False)
