@@ -32,7 +32,10 @@ def main():
     pca_df, loadings_df = apply_pca(X_scaled)
     tsne_df = apply_tsne(X_scaled)
 
-    final_df = pd.concat([df_imputed.reset_index(drop=True), pca_df, tsne_df], axis=1)
+    df_final_cols = add_age_group(df_imputed)
+    df_final_cols = add_percentage_columns(df_final_cols, ['education-num', 'occupation', 'age-group', 'income'])
+
+    final_df = pd.concat([df_final_cols.reset_index(drop=True), pca_df, tsne_df], axis=1)
     loadings_df.to_csv(processed_dir / 'pca_loadings.csv', index=True)
 
     final_df.to_csv(out_path, index=False)

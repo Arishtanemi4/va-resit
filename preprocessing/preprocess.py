@@ -99,3 +99,26 @@ def scale_data(X):
     scaler = StandardScaler()
     X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
     return X_scaled
+
+
+# Buckets each person's age into a readable range (e.g. "30-39"), so the
+# dashboard can show income by age group instead of by exact age.
+def add_age_group(df):
+    df = df.copy()
+    bins = [0, 20, 30, 40, 50, 60, 70, 150]
+    labels = ['<20', '20-29', '30-39', '40-49', '50-59', '60-69', '70+']
+    df['age-group'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
+    return df
+
+
+# For each dashboard column given, adds how many rows share that value
+# (absolute) and what percentage of the whole dataset that is, so Tableau
+# can show either number without needing its own calculated field.
+def add_percentage_columns(df, dimension_cols):
+    df = df.copy()
+    total_rows = len(df)
+    for col in dimension_cols:  # go through each dashboard column, to add its own count/percentage pair
+        counts = df.groupby(col)[col].transform('count')  # count how many rows share this row's category
+        df[f'{col}-count'] = counts
+        df[f'{col}-pct'] = (counts / total_rows * 100).round(2)
+    return df
