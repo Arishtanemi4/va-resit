@@ -23,6 +23,8 @@ def load_and_clean_anomalies(data_path, test_path):
 
     df_data = pd.read_csv(data_path, header=None, names=column_names, skipinitialspace=True)
     df_test = pd.read_csv(test_path, header=None, names=column_names, skipinitialspace=True, skiprows=1)  # skip the '|1x3 Cross validator' junk header line
+    df_data['split'] = 'train'  # remember which raw file each row came from, so the forecast step can train on adult.data and predict on the held-out adult.test rows
+    df_test['split'] = 'test'
     df = pd.concat([df_data, df_test], ignore_index=True)  # stack the two splits into one table, renumbering the rows
 
     df['income'] = df['income'].str.rstrip('.')  # adult.test writes income as '<=50K.'/'>50K.' — strip the trailing dot so both splits share one label
@@ -43,7 +45,7 @@ def load_and_clean_anomalies(data_path, test_path):
 # Converts each category into a single number code (blanks stay blank) so
 # the imputer below can treat a missing category like a missing number.
 def encode_ordinal_categoricals(df):
-    X = df.drop(columns=['income'])
+    X = df.drop(columns=['income', 'split'])  # 'split' is a pipeline bookkeeping column (which raw file a row came from), not a person's attribute — keep it out of the imputation/PCA/t-SNE feature matrix, same as 'income'
     categorical_cols = X.select_dtypes(include=['object']).columns
 
     X_ordinal = X.copy()
